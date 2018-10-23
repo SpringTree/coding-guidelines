@@ -37,7 +37,7 @@ You can install this on a Mac using [Homebrew](https://brew.sh/)
 brew install git-flow-avh
 ```
 
-We have a whole wiki page dedicated to [how we use Git flow to perform releases](wiki/Release-&-development-flow).
+We have a whole wiki page dedicated to [how we use Git flow to perform releases](https://github.com/SpringTree/coding-guidelines/wiki/Release-&-development-flow).
 
 ## Git branch protection
 
