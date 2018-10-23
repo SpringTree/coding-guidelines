@@ -38,15 +38,16 @@ brew install git-flow-avh
 ```
 
 We have a whole wiki page dedicated to [how we use Git flow to perform releases](https://github.com/SpringTree/coding-guidelines/wiki/Release-&-development-flow).
+Try to contain work in separate feature branches as much as possible.
 
 ## Git branch protection
 
-Projects on GitHub should be setup with protection to not be able to directly push to the `master` and `develop` branches.
+Projects on GitHub should be setup with branch protection to now allow direct pushes to the `master` and `develop` branches.
 The restriction on `master` is also enforced for administrators.
 
 ## Git commit log format
 
-We use the Angular commit log format which we enforce use a combination of [commitlint](https://github.com/marionebl/commitlint) and [husky](https://github.com/typicode/husky).
+We use the Angular commit log format which we enforce using a combination of [commitlint](https://github.com/marionebl/commitlint) and [husky](https://github.com/typicode/husky).
 
 You can install these tools using npm:
 
@@ -66,7 +67,7 @@ Add the following husky hook to your package.json to enforce the format:
 
 ## Build using CI
 
-All project should be built using a CI and should not depend on the build chain of an individual developers laptop.
+All projects should be built using a CI and should not depend on the build chain of an individual developers laptop.
 This should preferable be setup at project inception.
 
 We use the folloing CI's at this time:
