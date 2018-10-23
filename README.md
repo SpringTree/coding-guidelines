@@ -7,7 +7,7 @@ A collection of configuration files for various tools and linters that can be us
 ## Style guide
 
 We have adopted the [Airbnb](https://github.com/airbnb/javascript) style guide for our JavaScript and TypeScript projects.
-This is a very widely used standard and support is available in a multitude of editors and CI tools
+This is a very widely used standard and support is available in a multitude of editors and CI tools.
 All new projects must use this style guide.
 When coding on an existing project adhere to the cureent style used throughout the project.
 This repository contains configuration files for [eslint](linters/.eslintrc) and [tslint](linters/.tslint.json).
@@ -17,6 +17,10 @@ You can install these tools using npm:
 ```bash
 npm i -D eslint eslint-config-airbnb-base eslint-plugin-import tslint tslint-config-airbnb
 ```
+
+## Human language
+
+All code, variable names, code comments and documentation should be written in English.
 
 ## Project README
 
