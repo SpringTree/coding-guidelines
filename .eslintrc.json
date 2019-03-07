@@ -1,0 +1,8 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "space-in-parens": [ "error", "always" ],
+    "max-len": [ "error", { "code": 160 } ],
+    "no-console": "off"
+  }
+}
