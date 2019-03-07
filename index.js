@@ -63,6 +63,10 @@ if ( program.gitcommit || program.all ) {
     };
   }
   jsonfile.writeFileSync( packageJsonFile, packageJson, { spaces: 2 } );
+
+  console.log( 'Writing commitlint config...' );
+  const templateCommitlintConfig = fs.readFileSync( path.resolve( appRoot, 'commitlint.config.js' ) );
+  fs.writeFileSync( path.resolve( './commitlint.config.js' ), templateCommitlintConfig );
 }
 
 console.log( 'Done. Happy coding!' );
