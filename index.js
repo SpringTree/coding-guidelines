@@ -20,7 +20,6 @@ program
   .usage( '[options]' )
 
   .option( '--linter', 'Setup linting and git commit for the current folder' )
-  .option( '--gitignore', 'Setup git ignore' )
   .option( '--gitcommit', 'Setup husky and commitlint' )
 
   .option( '--init', 'Setup all of the above' )
@@ -44,14 +43,6 @@ if ( program.linter || program.init ) {
   fs.writeFileSync( path.resolve( './.eslintrc.json' ), templateEslintrc );
   const templateTslintrc = fs.readFileSync( path.resolve( appRoot, 'tslint.json' ) );
   fs.writeFileSync( path.resolve( './tslint.json' ), templateTslintrc );
-}
-
-// Setup gitignore
-//
-if ( program.gitignore || program.init ) {
-  console.log( 'Writing gitignore file...' );
-  const templateGitignore = fs.readFileSync( path.resolve( appRoot, '.gitignore' ) );
-  fs.writeFileSync( path.resolve( './.gitignore' ), templateGitignore );
 }
 
 // Setup git commit hook
