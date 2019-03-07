@@ -6,7 +6,7 @@ const path = require( 'path' );
 
 // Determine script location
 //
-const appRoot = path.resolve( __dirname, '..' );
+const appRoot = path.resolve( __dirname );
 
 // Load package.json
 //
@@ -22,33 +22,40 @@ program
   .option( '--gitignore', 'Setup git ignore' )
   .option( '--gitcommit', 'Setup husky and commitlint' )
 
-  .option( '--all', 'Setup all' )
+  .option( '--init', 'Setup all of the above' )
 
   .parse( process.argv );
 
+// Check if any options was specified
+//
+if ( !program.linter && !program.gitignore && !program.gitcommit && !program.init ) {
+  program.help();
+}
+
 // Setup linter
 //
-if ( program.linter || program.all ) {
+if ( program.linter || program.init ) {
   console.log( 'Installing linter dependencies...' );
   childProcess.execSync( 'npm i -D eslint eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-import tslint tslint-config-airbnb' );
 
   console.log( 'Writing linter config files...' );
   const templateEslintrc = fs.readFileSync( path.resolve( appRoot, '.eslintrc.json' ) );
   fs.writeFileSync( path.resolve( './.eslintrc.json' ), templateEslintrc );
-  const templateTslintrc = fs.readFileSync( path.resolve( appRoot, '.tslint.json' ) );
-  fs.writeFileSync( path.resolve( './.tslint.json' ), templateTslintrc );
+  const templateTslintrc = fs.readFileSync( path.resolve( appRoot, 'tslint.json' ) );
+  fs.writeFileSync( path.resolve( './tslint.json' ), templateTslintrc );
 }
 
 // Setup gitignore
 //
-if ( program.gitignore || program.all ) {
+if ( program.gitignore || program.init ) {
+  console.log( 'Writing gitignore file...' );
   const templateGitignore = fs.readFileSync( path.resolve( appRoot, '.gitignore' ) );
   fs.writeFileSync( path.resolve( './.gitignore' ), templateGitignore );
 }
 
 // Setup git commit hook
 //
-if ( program.gitcommit || program.all ) {
+if ( program.gitcommit || program.init ) {
   console.log( 'Installing git commit dependencies...' );
   childProcess.execSync( 'npm i -D husky @commitlint/cli @commitlint/config-angular' );
 
