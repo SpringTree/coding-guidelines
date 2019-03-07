@@ -15,7 +15,7 @@ This repository contains configuration files for [eslint](linters/.eslintrc) and
 You can install these tools using npm:
 
 ```bash
-npm i -D eslint eslint-config-airbnb-base eslint-plugin-import tslint tslint-config-airbnb
+npm i -D eslint eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-import tslint tslint-config-airbnb
 ```
 
 ## Human language
@@ -67,6 +67,12 @@ Add the following husky hook to your package.json to enforce the format:
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
+```
+
+Create a commitlint configuration files:
+
+```bash
+echo "module.exports = { extends: ['@commitlint/config-angular'] }" > commitlint.config.js
 ```
 
 ## Build using CI
