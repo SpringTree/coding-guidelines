@@ -4,10 +4,22 @@ This repository contains information about our company rules and guidelines when
 Our primary development language is JavaScript/TypeScript so those will be featured here prominently.
 A collection of configuration files for various tools and linters that can be used in our projects can also be found here.
 
+You can now use `npx` to setup linting and the gitcommit hooks using this repository:
+
+```bash
+npx @springtree/coding --init
+```
+
 ## Style guide
 
 We have adopted the [Airbnb](https://github.com/airbnb/javascript) style guide for our JavaScript and TypeScript projects.
 This is a very widely used standard and support is available in a multitude of editors and CI tools.
+We have added the following rules to the style to make the resulting code a little more spacious and readable:
+
+* max line length increased to 160
+* enforce spaces inside parenthesis
+* allow console statements
+
 All new projects must use this style guide.
 When coding on an existing project adhere to the cureent style used throughout the project.
 This repository contains configuration files for [eslint](linters/.eslintrc) and [tslint](linters/.tslint.json).
