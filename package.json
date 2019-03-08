@@ -1,6 +1,6 @@
 {
   "name": "@springtree/coding",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": false,
   "description": "The SpringTree coding guidelines and helper scripts",
   "bin": "index.js",
