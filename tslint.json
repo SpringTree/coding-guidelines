@@ -2,7 +2,8 @@
   "extends": "tslint-config-airbnb",
   "rules": {
     "max-line-length": [ true, 160 ],
-    "space-within-parens": true,
+    "space-within-parens": [ true, 1 ],
+    "space-in-parens": [true, "always"],
     "no-console": false
   }
 }
