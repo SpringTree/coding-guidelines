@@ -45,6 +45,7 @@ if ( program.linter || program.init ) {
     'tslint',
     'tslint-config-airbnb',
     'tslint-eslint-rules',
+    'typescript',
   ];
   childProcess.execSync( `npm i -D ${packagesToInstall.join( ' ' )}` );
 
@@ -64,7 +65,7 @@ if ( program.linter || program.init ) {
   if ( !packageJson.scripts ) {
     packageJson.scripts = {};
   }
-  packageJson.scripts.tslint = 'tslint -p tsconfig,json';
+  packageJson.scripts.tslint = 'tslint -p tsconfig.json';
   packageJson.scripts['tslint-fix'] = 'tslint -p tsconfig,json --fix';
   jsonfile.writeFileSync( packageJsonFile, packageJson, { spaces: 2 } );
 }
@@ -87,7 +88,7 @@ if ( program.gitcommit || program.init ) {
   if ( !packageJson.husky.hooks ) {
     packageJson.husky.hooks = {};
   }
-  packageJson.husky.hooks['commit-mmsg'] = 'commitlint -E HUSKY_GIT_PARAMS';
+  packageJson.husky.hooks['commit-msg'] = 'commitlint -E HUSKY_GIT_PARAMS';
   jsonfile.writeFileSync( packageJsonFile, packageJson, { spaces: 2 } );
 
   console.log( 'Writing commitlint config...' );
