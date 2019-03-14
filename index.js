@@ -36,13 +36,37 @@ if ( !program.linter && !program.gitignore && !program.gitcommit && !program.ini
 //
 if ( program.linter || program.init ) {
   console.log( 'Installing linter dependencies...' );
-  childProcess.execSync( 'npm i -D eslint eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-import tslint tslint-config-airbnb' );
+  const packagesToInstall = [
+    'eslint',
+    'eslint-config-airbnb',
+    'eslint-plugin-import',
+    'eslint-plugin-jsx-a11y',
+    'eslint-plugin-react',
+    'tslint',
+    'tslint-config-airbnb',
+    'tslint-eslint-rules',
+  ];
+  childProcess.execSync( `npm i -D ${packagesToInstall.join( ' ' )}` );
 
   console.log( 'Writing linter config files...' );
   const templateEslintrc = fs.readFileSync( path.resolve( appRoot, '.eslintrc.json' ) );
   fs.writeFileSync( path.resolve( './.eslintrc.json' ), templateEslintrc );
   const templateTslintrc = fs.readFileSync( path.resolve( appRoot, 'tslint.json' ) );
   fs.writeFileSync( path.resolve( './tslint.json' ), templateTslintrc );
+
+  // Add npm run scripts for linting
+  //
+  // * tslint - run project linting
+  // * tslint-fix - fix project issues
+  //
+  const packageJsonFile = path.resolve( './package.json' );
+  const packageJson = jsonfile.readFileSync( packageJsonFile );
+  if ( !packageJson.scripts ) {
+    packageJson.scripts = {};
+  }
+  packageJson.scripts.tslint = 'tslint -p tsconfig,json';
+  packageJson.scripts['tslint-fix'] = 'tslint -p tsconfig,json --fix';
+  jsonfile.writeFileSync( packageJsonFile, packageJson, { spaces: 2 } );
 }
 
 // Setup git commit hook
@@ -54,13 +78,16 @@ if ( program.gitcommit || program.init ) {
   console.log( 'Adding git commit hook to package.json...' );
   const packageJsonFile = path.resolve( './package.json' );
   const packageJson = jsonfile.readFileSync( packageJsonFile );
+
+  // Add husky hoop to package.json
+  //
   if ( !packageJson.husky ) {
-    packageJson.husky = {
-      hooks: {
-        'commit-msg': 'commitlint -E HUSKY_GIT_PARAMS',
-      },
-    };
+    packageJson.husky = {};
   }
+  if ( !packageJson.husky.hooks ) {
+    packageJson.husky.hooks = {};
+  }
+  packageJson.husky.hooks['commit-mmsg'] = 'commitlint -E HUSKY_GIT_PARAMS';
   jsonfile.writeFileSync( packageJsonFile, packageJson, { spaces: 2 } );
 
   console.log( 'Writing commitlint config...' );
