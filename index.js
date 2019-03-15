@@ -66,7 +66,7 @@ if ( program.linter || program.init ) {
     packageJson.scripts = {};
   }
   packageJson.scripts.tslint = 'tslint -p tsconfig.json';
-  packageJson.scripts['tslint-fix'] = 'tslint -p tsconfig,json --fix';
+  packageJson.scripts['tslint-fix'] = 'tslint -p tsconfig.json --fix';
   jsonfile.writeFileSync( packageJsonFile, packageJson, { spaces: 2 } );
 }
 
