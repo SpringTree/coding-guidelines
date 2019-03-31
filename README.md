@@ -13,7 +13,7 @@ npx @springtree/coding --init
 If you are using a project without TypeScript run:
 
 ```bash
-npx @springtree/coding --init --no-ts
+npx @springtree/coding --init --skip-ts
 ```
 
 ## Style guide
