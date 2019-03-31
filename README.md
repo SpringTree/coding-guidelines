@@ -18,7 +18,6 @@ We have added the following rules to the style to make the resulting code a litt
 
 * max line length increased to 160
 * enforce spaces inside parenthesis
-* enforce array bracket spacing
 * allow console statements
 
 All new projects must use this style guide.

@@ -5,7 +5,6 @@
     "max-line-length": [ true, 160 ],
     "space-within-parens": [ true, 1 ],
     "space-in-parens": [true, "always"],
-    "array-bracket-spacing": [ true, "always" ],
     "no-console": false
   },
   "rulesDirectory": [
