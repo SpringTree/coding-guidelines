@@ -100,7 +100,7 @@ if ( program.linter || program.init ) {
 //
 if ( program.gitcommit || program.init ) {
   console.log( 'Installing git commit dependencies...' );
-  childProcess.execSync( 'npm i -D husky @commitlint/cli @commitlint/config-angular' );
+  childProcess.execSync( 'npm i -D husky @commitlint/cli @commitlint/config-conventional' );
 
   console.log( 'Adding git commit hook to package.json...' );
 
