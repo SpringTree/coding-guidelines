@@ -10,6 +10,12 @@ You can now use `npx` to setup linting and the gitcommit hooks using this reposi
 npx @springtree/coding --init
 ```
 
+If you are using a project without TypeScript run:
+
+```bash
+npx @springtree/coding --init --no-ts
+```
+
 ## Style guide
 
 We have adopted the [Airbnb](https://github.com/airbnb/javascript) style guide for our JavaScript and TypeScript projects.
@@ -56,10 +62,19 @@ brew install git-flow-avh
 We have a whole wiki page dedicated to [how we use Git flow to perform releases](https://github.com/SpringTree/coding-guidelines/wiki/Release-&-development-flow).
 Try to contain work in separate feature branches as much as possible.
 
-## Git branch protection
+## Git branch protection and enforcement
 
 Projects on GitHub should be setup with branch protection to now allow direct pushes to the `master` and `develop` branches.
 The restriction on `master` is also enforced for administrators.
+
+Branch naming enforcement can be installed with:
+
+```bash
+npx @springtree/coding --gitflow
+```
+
+NOTE: Be sure to initialise your repo with git flow first and push master/develop branches.
+The branch enforcement will dissallow direct pushing to those branches.
 
 ## Git commit log format
 
