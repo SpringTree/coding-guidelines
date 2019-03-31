@@ -73,8 +73,7 @@ Branch naming enforcement can be installed with:
 npx @springtree/coding --gitflow
 ```
 
-NOTE: Be sure to initialise your repo with git flow first and push master/develop branches.
-The branch enforcement will dissallow direct pushing to those branches.
+NOTE: Be sure to initialise your repo with git flow first and perform the initial push of master and develop branches.
 
 ## Git commit log format
 
