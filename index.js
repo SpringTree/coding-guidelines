@@ -170,6 +170,7 @@ if ( program.init ) {
   //
   const gitignoreFile = path.resolve( './.gitignore' );
   if ( !fs.existsSync( gitignoreFile ) ) {
+    console.log( 'Adding gitignore file...' );
     fs.writeFileSync( gitignoreFile, 'node_modules' );
   }
 
@@ -177,6 +178,7 @@ if ( program.init ) {
   //
   const nvmrcFile = path.resolve( './.nvmrc' );
   if ( !fs.existsSync( nvmrcFile ) ) {
+    console.log( 'Adding nvmrc file...' );
     fs.writeFileSync( nvmrcFile, 'v8' );
   }
 
@@ -187,6 +189,7 @@ if ( program.init ) {
     const tsconfigFile = path.resolve( './tsconfig.json' );
     if ( !fs.existsSync( tsconfigFile ) ) {
       const templateTsConfig = fs.readFileSync( path.resolve( appRoot, 'tsconfig.json' ) );
+      console.log( 'Adding tsconfig.json file...' );
       fs.writeFileSync( tsconfigFile, templateTsConfig );
     }
   }
