@@ -163,29 +163,32 @@ if ( program.gitflow ) {
   jsonfile.writeFileSync( packageJsonFile, packageJson, { spaces: 2 } );
 }
 
-// Check if an gitignore file exists
+// Sanity check for basic files
 //
-//
-const gitignoreFile = path.resolve( './.gitignore' );
-if ( !fs.existsSync( gitignoreFile ) ) {
-  fs.writeFileSync( gitignoreFile, 'node_modules' );
-}
+if ( program.init ) {
+  // Check if an gitignore file exists
+  //
+  const gitignoreFile = path.resolve( './.gitignore' );
+  if ( !fs.existsSync( gitignoreFile ) ) {
+    fs.writeFileSync( gitignoreFile, 'node_modules' );
+  }
 
-// Check if an nvmrc file exists
-//
-const nvmrcFile = path.resolve( './.nvmrc' );
-if ( !fs.existsSync( nvmrcFile ) ) {
-  fs.writeFileSync( nvmrcFile, 'v8' );
-}
+  // Check if an nvmrc file exists
+  //
+  const nvmrcFile = path.resolve( './.nvmrc' );
+  if ( !fs.existsSync( nvmrcFile ) ) {
+    fs.writeFileSync( nvmrcFile, 'v8' );
+  }
 
-// Check if a tsconfig.json file is present
-// Use the config from this project as a baseline if missing
-//
-if ( !program.skipTs ) {
-  const tsconfigFile = path.resolve( './tsconfig.json' );
-  if ( !fs.existsSync( tsconfigFile ) ) {
-    const templateTsConfig = fs.readFileSync( path.resolve( appRoot, 'tsconfig.json' ) );
-    fs.writeFileSync( tsconfigFile, templateTsConfig );
+  // Check if a tsconfig.json file is present
+  // Use the config from this project as a baseline if missing
+  //
+  if ( !program.skipTs ) {
+    const tsconfigFile = path.resolve( './tsconfig.json' );
+    if ( !fs.existsSync( tsconfigFile ) ) {
+      const templateTsConfig = fs.readFileSync( path.resolve( appRoot, 'tsconfig.json' ) );
+      fs.writeFileSync( tsconfigFile, templateTsConfig );
+    }
   }
 }
 
