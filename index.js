@@ -119,7 +119,11 @@ if ( program.gitcommit || program.init ) {
   if ( !packageJson.husky.hooks ) {
     packageJson.husky.hooks = {};
   }
-  packageJson.husky.hooks['commit-msg'] = 'commitlint -E HUSKY_GIT_PARAMS';
+  if ( packageJson.husky.hooks['commit-msg'] && packageJson.husky.hooks['commit-msg'] !== 'commitlint -E HUSKY_GIT_PARAMS' ) {
+    packageJson.husky.hooks['commit-msg'] += ' && commitlint -E HUSKY_GIT_PARAMS';
+  } else {
+    packageJson.husky.hooks['commit-msg'] = 'commitlint -E HUSKY_GIT_PARAMS';
+  }
   jsonfile.writeFileSync( packageJsonFile, packageJson, { spaces: 2 } );
 
   // Update the package.json file
@@ -155,7 +159,14 @@ if ( program.gitflow ) {
   if ( !packageJson.husky.hooks ) {
     packageJson.husky.hooks = {};
   }
-  packageJson.husky.hooks['pre-push'] = 'enforce-gitflow-branches';
+
+  // Amend if the hook already exists
+  //
+  if ( packageJson.husky.hooks['pre-push'] && packageJson.husky.hooks['pre-push'] !== 'enforce-gitflow-branches' ) {
+    packageJson.husky.hooks['pre-push'] += ' && enforce-gitflow-branches';
+  } else {
+    packageJson.husky.hooks['pre-push'] = 'enforce-gitflow-branches';
+  }
 
   // Update the package.json file
   //
