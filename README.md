@@ -23,11 +23,11 @@ This is a very widely used standard and support is available in a multitude of e
 We have added the following rules to the style to make the resulting code a little more spacious and readable:
 
 * max line length increased to 160
-* enforce spaces inside parenthesis
+* enforce spaces inside a parenthesis
 * allow console statements
 
 All new projects must use this style guide.
-When coding on an existing project adhere to the cureent style used throughout the project.
+When coding on an existing project adheres to the current style used throughout the project.
 This repository contains configuration files for [eslint](linters/.eslintrc) and [tslint](linters/.tslint.json).
 
 You can install these tools using npm:
@@ -52,7 +52,7 @@ Any additional information about how to run unit tests should be added if availa
 
 ## Git flow AVH
 
-We use [Git flow AVH](https://github.com/petervanderdoes/gitflow-avh) as our branching stategy.
+We use [Git flow AVH](https://github.com/petervanderdoes/gitflow-avh) as our branching strategy.
 You can install this on a Mac using [Homebrew](https://brew.sh/)
 
 ```bash
@@ -64,7 +64,7 @@ Try to contain work in separate feature branches as much as possible.
 
 ## Git branch protection and enforcement
 
-Projects on GitHub should be setup with branch protection to now allow direct pushes to the `master` and `develop` branches.
+Projects on GitHub should be set up with branch protection to now allow direct pushes to the `master` and `develop` branches.
 The restriction on `master` is also enforced for administrators.
 
 Branch naming enforcement can be installed with:
@@ -73,7 +73,7 @@ Branch naming enforcement can be installed with:
 npx @springtree/coding --gitflow
 ```
 
-NOTE: Be sure to initialise your repo with git flow first and perform the initial push of master and develop branches.
+NOTE: Be sure to initialize your repo with git-flow first and perform the initial push of master and develop branches.
 
 ## Git commit log format
 
@@ -104,7 +104,7 @@ echo "module.exports = { extends: ['@commitlint/config-angular'] }" > commitlint
 ## Build using CI
 
 All projects should be built using a CI and should not depend on the build chain of an individual developers laptop.
-This should preferable be setup at project inception.
+This should preferably be set up at project inception.
 
 We use the folloing CI's at this time:
 
@@ -116,5 +116,5 @@ Use tools like docker to encapsulate your build chain.
 
 ### Pull request validation with CI
 
-Pull requests should be setup to use the CI to validate the branch is building.
+Pull requests should be set up to use the CI to validate the branch is building.
 If available this should include running the unit test suite.
