@@ -1,5 +1,7 @@
 # SpringTree coding guidelines
 
+[![npm version](https://badge.fury.io/js/%40springtree%2Fcoding.svg)](https://badge.fury.io/js/%40springtree%2Fcoding)
+
 This repository contains information about our company rules and guidelines when it comes to writing software.
 Our primary development language is JavaScript/TypeScript so those will be featured here prominently.
 A collection of configuration files for various tools and linters that can be used in our projects can also be found here.
