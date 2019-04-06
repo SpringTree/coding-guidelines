@@ -140,7 +140,7 @@ if ( program.gitcommit || program.init ) {
 //
 if ( program.gitflow ) {
   console.log( 'Installing gitflow dependencies...' );
-  childProcess.execSync( 'npm i -D husky enforce-gitflow-branches' );
+  childProcess.execSync( 'npm i -D husky @springtree/check-git-branch-name' );
 
   console.log( 'Adding gitflow pre-push hook to package.json...' );
 
@@ -162,10 +162,10 @@ if ( program.gitflow ) {
 
   // Amend if the hook already exists
   //
-  if ( packageJson.husky.hooks['pre-push'] && packageJson.husky.hooks['pre-push'] !== 'enforce-gitflow-branches' ) {
-    packageJson.husky.hooks['pre-push'] += ' && enforce-gitflow-branches';
+  if ( packageJson.husky.hooks['pre-push'] && packageJson.husky.hooks['pre-push'] !== '@springtree/check-git-branch-name -e' ) {
+    packageJson.husky.hooks['pre-push'] += ' && @springtree/check-git-branch-name -e';
   } else {
-    packageJson.husky.hooks['pre-push'] = 'enforce-gitflow-branches';
+    packageJson.husky.hooks['pre-push'] = '@springtree/check-git-branch-name -e';
   }
 
   // Update the package.json file

@@ -66,8 +66,9 @@ Try to contain work in separate feature branches as much as possible.
 
 Projects on GitHub should be set up with branch protection to now allow direct pushes to the `master` and `develop` branches.
 The restriction on `master` is also enforced for administrators.
+We have our own [git branch name checking tool](https://github.com/SpringTree/check-git-branch-name).
 
-Branch naming enforcement can be installed with:
+Branch naming checking can be installed with:
 
 ```bash
 npx @springtree/coding --gitflow
