@@ -29,7 +29,7 @@ We have added the following rules to the style to make the resulting code a litt
 * allow console statements
 
 All new projects must use this style guide.
-When coding on an existing project adheres to the current style used throughout the project.
+When coding on an existing project stick to the current style used throughout that project if there are too many issues when switching.
 This repository contains configuration files for [eslint](linters/.eslintrc) and [tslint](linters/.tslint.json).
 
 You can install these tools using npm:
