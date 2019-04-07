@@ -162,10 +162,10 @@ if ( program.gitflow ) {
 
   // Amend if the hook already exists
   //
-  if ( packageJson.husky.hooks['pre-push'] && packageJson.husky.hooks['pre-push'] !== '@springtree/check-git-branch-name -e' ) {
-    packageJson.husky.hooks['pre-push'] += ' && @springtree/check-git-branch-name -e';
+  if ( packageJson.husky.hooks['pre-push'] && packageJson.husky.hooks['pre-push'] !== 'check-git-branch-name -e' ) {
+    packageJson.husky.hooks['pre-push'] += ' && check-git-branch-name -e';
   } else {
-    packageJson.husky.hooks['pre-push'] = '@springtree/check-git-branch-name -e';
+    packageJson.husky.hooks['pre-push'] = 'check-git-branch-name -e';
   }
 
   // Update the package.json file
