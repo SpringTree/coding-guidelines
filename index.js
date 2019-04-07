@@ -190,7 +190,7 @@ if ( program.init ) {
   const nvmrcFile = path.resolve( './.nvmrc' );
   if ( !fs.existsSync( nvmrcFile ) ) {
     console.log( 'Adding nvmrc file...' );
-    fs.writeFileSync( nvmrcFile, 'v8' );
+    fs.writeFileSync( nvmrcFile, 'v10' );
   }
 
   // Check if a tsconfig.json file is present
