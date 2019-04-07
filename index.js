@@ -193,6 +193,15 @@ if ( program.init ) {
     fs.writeFileSync( nvmrcFile, 'v10' );
   }
 
+  // Check if an editorconfig file exists
+  //
+  const editorconfigFile = path.resolve( './.editorconfig' );
+  if ( !fs.existsSync( editorconfigFile ) ) {
+    const templateEditorConfig = fs.readFileSync( path.resolve( appRoot, '.editorconfig' ) );
+    console.log( 'Adding editorconfig file...' );
+    fs.writeFileSync( editorconfigFile, templateEditorConfig );
+  }
+
   // Check if a tsconfig.json file is present
   // Use the config from this project as a baseline if missing
   //
