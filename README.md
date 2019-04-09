@@ -120,7 +120,7 @@ echo "module.exports = { extends: ['@commitlint/config-angular'] }" > commitlint
 All projects should be built using a CI and should not depend on the build chain of an individual developers laptop.
 This should preferably be set up at project inception.
 
-We use the folloing CI's at this time:
+We use the following CI's at this time:
 
 * [Bitrise.io](http://bitrise.io) (for mobile)
 * [TravisCI](https://travis-ci.com) (general purpose)
