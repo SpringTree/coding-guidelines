@@ -38,6 +38,17 @@ You can install these tools using npm:
 npm i -D eslint eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-import tslint tslint-config-airbnb
 ```
 
+### Code comments
+
+Try to document why your code is there not what it does.
+Document any special circumstances you've encountered when writing or adjusting said code.
+Well structured and documented code will save you and your co-workers time in the future.
+Writing out your code comments before writing any actual code is also a nice trick to organise your thoughts before diving into the details.
+
+Feel free to to read [this article](https://medium.freecodecamp.org/code-comments-the-good-the-bad-and-the-ugly-be9cc65fbf83) as a nice primer.
+
+For your VSCode you can install the [document this plugin](https://marketplace.visualstudio.com/itemdetails?itemName=joelday.docthis) to help with the automatic generation of JSDoc style comments for your code.
+
 ## Human language
 
 All code, variable names, code comments and documentation should be written in English.
