@@ -47,6 +47,8 @@ Writing out your code comments before writing any actual code is also a nice tri
 Feel free to to read [this article](https://medium.freecodecamp.org/code-comments-the-good-the-bad-and-the-ugly-be9cc65fbf83) as a nice primer.
 
 For your VSCode you can install the [document this plugin](https://marketplace.visualstudio.com/itemdetails?itemName=joelday.docthis) to help with the automatic generation of JSDoc style comments for your code.
+Please disable the memberOf generation in your vscode preferences for this plugin.
+![document this setting](docs/document_this.png)
 
 ## Human language
 
