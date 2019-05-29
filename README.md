@@ -22,10 +22,9 @@ npx @springtree/coding --init --skip-ts
 
 We have adopted the [Airbnb](https://github.com/airbnb/javascript) style guide for our JavaScript and TypeScript projects.
 This is a very widely used standard and support is available in a multitude of editors and CI tools.
-We have added the following rules to the style to make the resulting code a little more spacious and readable:
+We have only modified the following rules:
 
 * max line length increased to 160
-* enforce spaces inside a parenthesis
 * allow console statements
 
 All new projects must use this style guide.
