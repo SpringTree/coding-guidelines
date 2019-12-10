@@ -119,11 +119,25 @@ if (program.gitcommit || program.init) {
   if (!packageJson.husky.hooks) {
     packageJson.husky.hooks = {};
   }
+
+  // Setup commit message validation hook
+  //
   if (packageJson.husky.hooks['commit-msg'] && packageJson.husky.hooks['commit-msg'] !== 'commitlint -E HUSKY_GIT_PARAMS') {
     packageJson.husky.hooks['commit-msg'] += ' && commitlint -E HUSKY_GIT_PARAMS';
   } else {
     packageJson.husky.hooks['commit-msg'] = 'commitlint -E HUSKY_GIT_PARAMS';
   }
+
+  // Setup tslint on push
+  //
+  if (!program.skipTs) {
+    if (packageJson.husky.hooks['pre-push'] && packageJson.husky.hooks['pre-push'] !== 'npm run tslint') {
+      packageJson.husky.hooks['pre-push'] += ' && npm run tslint';
+    } else {
+      packageJson.husky.hooks['pre-push'] = 'npm run tslint';
+    }
+  }
+
   jsonfile.writeFileSync(packageJsonFile, packageJson, { spaces: 2 });
 
   // Update the package.json file
