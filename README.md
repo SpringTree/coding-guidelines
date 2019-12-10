@@ -116,6 +116,11 @@ Create a commitlint configuration files:
 echo "module.exports = { extends: ['@commitlint/config-angular'] }" > commitlint.config.js
 ```
 
+## Linting
+
+This tool provides configuration for both eslint and tslint.
+An on push hook is setup to run tslint on your project sources configured in `tsconfig.json`.
+
 ## Build using CI
 
 All projects should be built using a CI and should not depend on the build chain of an individual developers laptop.
