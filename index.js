@@ -204,7 +204,7 @@ if (program.init) {
   const nvmrcFile = path.resolve('./.nvmrc');
   if (!fs.existsSync(nvmrcFile)) {
     console.log('Adding nvmrc file...');
-    fs.writeFileSync(nvmrcFile, 'v10');
+    fs.writeFileSync(nvmrcFile, 'v12');
   }
 
   // Check if an editorconfig file exists
