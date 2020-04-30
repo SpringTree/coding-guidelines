@@ -81,3 +81,4 @@ typings/
 
 # Generated TS code
 lib
+dist
