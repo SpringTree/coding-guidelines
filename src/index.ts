@@ -139,7 +139,7 @@ questions.push({
   }
 
   console.log('HOOKS: Configuring...');
-  fs.writeFileSync(path.resolve('./.huskyrc.json'), huskyConfig);
+  jsonfile.writeFileSync(path.resolve('./.huskyrc.json'), huskyConfig, { spaces: 2 });
 
   if (responses.tsconfig) {
     console.log('TSC: Setting up project config file...');
