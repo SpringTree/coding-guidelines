@@ -93,6 +93,7 @@ questions.push({
   //
   const packagesToInstall: string[] = [
     'husky',
+    'lint-staged',
     'eslint',
     'eslint-config-airbnb-typescript',
     'eslint-plugin-import@^2.20.1',
@@ -116,13 +117,17 @@ questions.push({
   // The configuration file in this project is the template
   //
   console.log('LINTER: Setting up linter config file...');
-  const templateEslintrc = fs.readFileSync(path.resolve(appRoot, '.eslintrc.json'));
-  fs.writeFileSync(path.resolve('./.eslintrc.json'), templateEslintrc);
+  const templateEslintConfig = fs.readFileSync(path.resolve(appRoot, '.eslintrc.json'));
+  fs.writeFileSync(path.resolve('./.eslintrc.json'), templateEslintConfig);
+  console.log('HOOKS: Setting up linter commit check...');
+  const templateLintStagedConfig = fs.readFileSync(path.resolve(appRoot, '.lintstagedrc.json'));
+  fs.writeFileSync(path.resolve('./.lintstagedrc.json'), templateLintStagedConfig);
 
   // Prepare the husky configuration
   //
   const huskyConfig: any = {
     hooks: {
+      'pre-commit': 'lint-staged',
     },
   };
 

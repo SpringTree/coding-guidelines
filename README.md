@@ -123,6 +123,8 @@ echo "module.exports = { extends: ['@commitlint/config-conventional'] }" > commi
 
 This tool provides configuration for both eslint with TypeScript support.
 The use of tslint is deprecated.
+A hook will be installed by this tool run `lint-staged` on your git staged files.
+This will auto-fix possible issues and prevent a commit of unlinted code.
 
 ## Build using CI
 
