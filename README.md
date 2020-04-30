@@ -9,14 +9,10 @@ A collection of configuration files for various tools and linters that can be us
 You can now use `npx` to setup linting and the gitcommit hooks using this repository:
 
 ```bash
-npx @springtree/coding --init
+npx @springtree/coding
 ```
 
-If you are using a project without TypeScript run:
-
-```bash
-npx @springtree/coding --init --skip-ts
-```
+It will ask you a series of questions for what to setup.
 
 ## Style guide
 
@@ -34,7 +30,14 @@ This repository contains configuration files for [eslint](linters/.eslintrc) and
 You can install these tools using npm:
 
 ```bash
-npm i -D eslint eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-import tslint tslint-config-airbnb
+npm install eslint \
+            eslint-config-airbnb-typescript \
+            eslint-plugin-import@^2.20.1 \
+            eslint-plugin-jsx-a11y@^6.2.3 \
+            eslint-plugin-react@^7.19.0 \
+            eslint-plugin-react-hooks@^2.5.0 \
+            @typescript-eslint/eslint-plugin@^2.24.0 \
+            --save-dev
 ```
 
 ### Code comments
@@ -92,12 +95,12 @@ NOTE: Be sure to initialize your repo with git-flow first and perform the initia
 
 ## Git commit log format
 
-We use the Angular commit log format which we enforce using a combination of [commitlint](https://github.com/marionebl/commitlint) and [husky](https://github.com/typicode/husky).
+We use the conventional commit log format which we enforce using a combination of [commitlint](https://github.com/marionebl/commitlint) and [husky](https://github.com/typicode/husky).
 
 You can install these tools using npm:
 
 ```bash
-npm i -D husky @commitlint/cli @commitlint/config-angular
+npm i -D husky @commitlint/cli @commitlint/config-conventional
 ```
 
 Add the following husky hook to your package.json to enforce the format:
@@ -113,13 +116,13 @@ Add the following husky hook to your package.json to enforce the format:
 Create a commitlint configuration files:
 
 ```bash
-echo "module.exports = { extends: ['@commitlint/config-angular'] }" > commitlint.config.js
+echo "module.exports = { extends: ['@commitlint/config-conventional'] }" > commitlint.config.js
 ```
 
 ## Linting
 
-This tool provides configuration for both eslint and tslint.
-An on push hook is setup to run tslint on your project sources configured in `tsconfig.json`.
+This tool provides configuration for both eslint with TypeScript support.
+The use of tslint is deprecated.
 
 ## Build using CI
 
@@ -133,6 +136,8 @@ We use the following CI's at this time:
 * CloudBuild (Google projects)
 
 Use tools like docker to encapsulate your build chain.
+
+We highly recommend using [semantic-release](https://github.com/semantic-release/semantic-release) for un-opinionated versioning.
 
 ### Pull request validation with CI
 
