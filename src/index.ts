@@ -25,7 +25,7 @@ const questions: prompts.PromptObject[] = [];
 
 // First check if the current folder has a .git folder
 //
-const isGitRepository = fs.existsSync('./git');
+const isGitRepository = fs.existsSync('.git');
 if (!isGitRepository) {
   questions.push({
     type: 'confirm',
@@ -154,6 +154,6 @@ questions.push({
     console.log('NVM: Adding nvmrc file for node v12...');
     fs.writeFileSync(nvmrcFile, 'v12');
   }
-})();
 
-console.log('DONE: Happy coding!');
+  console.log('DONE: Happy coding!');
+})();
