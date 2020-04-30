@@ -1,5 +1,13 @@
 {
-  "extends": "airbnb",
+  "extends": ["airbnb-typescript"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "ignorePatterns": [
+    "node_modules/",
+    "bower_components/",
+    "dist"
+  ],
   "rules": {
     "max-len": [ "error", { "code": 160 } ],
     "no-console": "off"
