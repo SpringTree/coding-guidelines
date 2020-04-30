@@ -3,12 +3,13 @@
   "version": "1.0.15",
   "private": false,
   "description": "The SpringTree coding guidelines and helper scripts",
-  "bin": "index.js",
-  "main": "index.js",
+  "bin": "dist/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tslint": "tslint -p tsconfig.json",
-    "tslint:fix": "tslint -p tsconfig.json --fix"
+    "prepublish": "tsc",
+    "build": "tsc",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./"
   },
   "repository": {
     "type": "git",
@@ -28,28 +29,24 @@
   },
   "homepage": "https://github.com/SpringTree/coding-guidelines#readme",
   "dependencies": {
-    "commander": "^4.0.1",
-    "jsonfile": "^5.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run tslint && check-git-branch-name -e",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
+    "jsonfile": "^6.0.1",
+    "prompts": "^2.3.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.2.0",
-    "@commitlint/config-conventional": "^8.2.0",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "@springtree/check-git-branch-name": "^1.0.4",
-    "eslint": "^6.7.2",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-plugin-import": "^2.19.1",
+    "@types/jsonfile": "^5.0.0",
+    "@types/node": "^13.13.4",
+    "@types/prompts": "^2.0.6",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^7.2.1",
+    "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.17.0",
-    "husky": "^3.1.0",
-    "tslint": "^5.20.1",
-    "tslint-config-airbnb": "^5.11.2",
-    "tslint-eslint-rules": "^5.4.0",
-    "typescript": "^3.7.3"
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.1",
+    "husky": "^4.2.5",
+    "typescript": "^3.8.3"
   }
 }
