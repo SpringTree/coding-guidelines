@@ -135,6 +135,9 @@ questions.push({
     console.log('HOOKS: Installing commit-lint...');
     childProcess.execSync('npm i -D @commitlint/cli @commitlint/config-conventional');
     huskyConfig.hooks['commit-msg'] = 'commitlint -E HUSKY_GIT_PARAMS';
+
+    const templateCommitLintConfig = fs.readFileSync(path.resolve(appRoot, '.commitlintrc.json'));
+    fs.writeFileSync(path.resolve('./.commitlintrc.json'), templateCommitLintConfig);
   }
 
   if (responses.gitFlow) {

@@ -6,7 +6,7 @@
   "ignorePatterns": [
     "node_modules/",
     "bower_components/",
-    "dist"
+    "dist/"
   ],
   "rules": {
     "max-len": [ "error", { "code": 160 } ],
