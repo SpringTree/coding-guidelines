@@ -32,11 +32,11 @@ You can install these tools using npm:
 ```bash
 npm install eslint \
             eslint-config-airbnb-typescript \
-            eslint-plugin-import@^2.20.1 \
-            eslint-plugin-jsx-a11y@^6.2.3 \
-            eslint-plugin-react@^7.19.0 \
-            eslint-plugin-react-hooks@^2.5.0 \
-            @typescript-eslint/eslint-plugin@^2.24.0 \
+            eslint-plugin-import@^2.22.0 \
+            eslint-plugin-jsx-a11y@^6.3.1 \
+            eslint-plugin-react@^7.20.3 \
+            eslint-plugin-react-hooks@^4.0.8 \
+            @typescript-eslint/eslint-plugin@^4.4.1 \
             --save-dev
 ```
 

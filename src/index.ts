@@ -96,17 +96,17 @@ questions.push({
     'lint-staged',
     'eslint',
     'eslint-config-airbnb-typescript',
-    'eslint-plugin-import@^2.20.1',
-    '@typescript-eslint/eslint-plugin@^2.24.0',
+    'eslint-plugin-import@^2.22.0',
+    '@typescript-eslint/eslint-plugin@^4.4.1',
   ];
 
   if (responses.eslintReact) {
     // Eslint with TypeScript support and React plugins
     //
     console.log('LINTER: Configuring ESLint with TypeScript and React support using AirBnB rules...');
-    packagesToInstall.push('eslint-plugin-jsx-a11y@^6.2.3');
-    packagesToInstall.push('eslint-plugin-react@^7.19.0');
-    packagesToInstall.push('eslint-plugin-react-hooks@^2.5.0');
+    packagesToInstall.push('eslint-plugin-jsx-a11y@^6.3.1');
+    packagesToInstall.push('eslint-plugin-react@^7.20.3');
+    packagesToInstall.push('eslint-plugin-react-hooks@^4.0.8');
   } else {
     // Only basic eslint with TypeScript support
     //
