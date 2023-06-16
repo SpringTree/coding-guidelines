@@ -97,7 +97,7 @@ questions.push({
     'eslint',
     'eslint-config-airbnb-typescript',
     'eslint-plugin-import@^2.22.0',
-    '@typescript-eslint/eslint-plugin@^4.4.1',
+    '@typescript-eslint/eslint-plugin@^5.13.0',
   ];
 
   if (responses.eslintReact) {
