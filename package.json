@@ -1,53 +1,60 @@
 {
   "name": "@springtree/coding",
   "version": "1.1.3",
-  "private": false,
-  "description": "The SpringTree coding guidelines and helper scripts",
-  "bin": "dist/index.js",
-  "main": "dist/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "tsc",
-    "build": "tsc",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./"
+  "description": "The SpringTree coding guidelines and project setup helper",
+  "keywords": [
+    "bootstrap",
+    "coding",
+    "guidelines",
+    "oxc",
+    "springtree"
+  ],
+  "homepage": "https://github.com/SpringTree/coding-guidelines#readme",
+  "bugs": {
+    "url": "https://github.com/SpringTree/coding-guidelines/issues"
   },
+  "license": "ISC",
+  "author": "Mark Doeswijk",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SpringTree/coding-guidelines.git"
   },
-  "keywords": [
-    "springtree",
-    "coding",
-    "guidelines",
-    "npx",
-    "bootstrap"
-  ],
-  "author": "Mark Doeswijk",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/SpringTree/coding-guidelines/issues"
+  "bin": {
+    "springtree-coding": "dist/cli.js"
   },
-  "homepage": "https://github.com/SpringTree/coding-guidelines#readme",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "bunup",
+    "dev": "bunup --watch",
+    "fmt": "oxfmt --check",
+    "fmt:fix": "oxfmt",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "prepare": "husky",
+    "test": "bun test",
+    "test:coverage": "bun test --coverage",
+    "type-check": "tsc --noEmit"
+  },
   "dependencies": {
-    "jsonfile": "^6.1.0",
-    "prompts": "^2.4.1"
+    "prompts": "^2.4.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^13.1.0",
-    "@commitlint/config-conventional": "^13.1.0",
-    "@springtree/check-git-branch-name": "^1.0.5",
-    "@types/jsonfile": "^6.0.1",
-    "@types/node": "^16.4.13",
-    "@types/prompts": "^2.0.14",
-    "@typescript-eslint/eslint-plugin": "^4.29.0",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb-typescript": "^12.3.1",
-    "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.24.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": "^7.0.1",
-    "lint-staged": "^11.1.2",
-    "typescript": "~4.2.3"
+    "@commitlint/cli": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.3",
+    "@types/bun": "^1.4.2",
+    "@types/prompts": "^2.4.9",
+    "bunup": "^0.16.32",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.5.1",
+    "oxfmt": "^0.70.0",
+    "oxlint": "^1.85.0",
+    "oxlint-tsgolint": "^7.0.2002",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

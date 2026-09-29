@@ -1,0 +1,5 @@
+# Hoisted node_modules layout, same as our other bun packages, so tools that
+# look for binaries and configs in node_modules/.bin behave like under npm
+#
+[install]
+linker = "hoisted"

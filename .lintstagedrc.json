@@ -1,3 +1,4 @@
 {
-  "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
+  "*": "oxfmt --no-error-on-unmatched-pattern",
+  "*.{cjs,js,jsx,mjs,ts,tsx}": "oxlint --fix"
 }
