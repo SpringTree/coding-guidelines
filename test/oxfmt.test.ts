@@ -26,6 +26,20 @@ describe("setupOxfmt", () => {
     setupOxfmt(context);
 
     expect(commands).toEqual([["bun", "add", "--dev", "oxfmt"]]);
-    expect(context.report.skipped).toContain(".oxfmtrc.json (already exists)");
+    expect(context.report.skipped).toContain("oxfmt config (.oxfmtrc.json already exists)");
   });
+
+  test.each([".oxfmtrc.jsonc", "oxfmt.config.ts"])(
+    "does not run init next to an existing %s",
+    (existingConfigFile) => {
+      const { commands, context } = createTestContext({ [existingConfigFile]: "{}" });
+
+      setupOxfmt(context);
+
+      expect(commands).toEqual([["bun", "add", "--dev", "oxfmt"]]);
+      expect(context.report.skipped).toContain(
+        `oxfmt config (${existingConfigFile} already exists)`,
+      );
+    },
+  );
 });

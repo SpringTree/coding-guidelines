@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { buildLintStagedConfig, setupLintStaged } from "../src/setup/lint-staged.js";
 import { createTestContext } from "./helpers.js";
@@ -51,5 +51,20 @@ describe("setupLintStaged", () => {
 
     expect(commands).toEqual([]);
     expect(context.report.skipped).toEqual(["lint-staged (neither oxlint nor oxfmt selected)"]);
+  });
+
+  test.each([
+    [".lintstagedrc.yml", { ".lintstagedrc.yml": "'*': eslint" }],
+    ["lint-staged.config.js", { "lint-staged.config.js": "export default {}" }],
+    ["package.json lint-staged key", { "package.json": '{ "lint-staged": { "*": "eslint" } }' }],
+  ])("keeps an existing config in %s and still adds the hook", (_description, files) => {
+    const { context } = createTestContext(files);
+
+    setupLintStaged(context, { oxfmt: true, oxlint: true });
+
+    expect(existsSync(path.join(context.projectDirectory, ".lintstagedrc.json"))).toBe(false);
+    expect(context.report.skipped.join("\n")).toContain("lint-staged config");
+    expect(context.report.notices.join("\n")).toContain("oxlint --fix");
+    expect(existsSync(path.join(context.projectDirectory, ".husky/pre-commit"))).toBe(true);
   });
 });

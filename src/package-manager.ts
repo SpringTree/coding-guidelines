@@ -19,11 +19,26 @@ const commandPrefixes: Record<PackageManagerName, PackageManagerCommandPrefixes>
   yarn: { addDevDependencies: ["yarn", "add", "--dev"], execute: ["yarn"] },
 };
 
+// Flags that allow adding dependencies to a workspace root, which pnpm and yarn
+// classic otherwise refuse. Other package managers add to the root without a flag
+//
+const workspaceRootFlags: Record<PackageManagerName, string[]> = {
+  bun: [],
+  npm: [],
+  pnpm: ["--workspace-root"],
+  yarn: ["-W"],
+};
+
 export function buildAddDevDependenciesCommand(
   packageManager: PackageManagerName,
   packageNames: string[],
+  isWorkspaceRoot = false,
 ): string[] {
-  return [...commandPrefixes[packageManager].addDevDependencies, ...packageNames];
+  return [
+    ...commandPrefixes[packageManager].addDevDependencies,
+    ...(isWorkspaceRoot ? workspaceRootFlags[packageManager] : []),
+    ...packageNames,
+  ];
 }
 
 export function buildExecuteCommand(

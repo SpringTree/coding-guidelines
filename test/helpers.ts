@@ -47,6 +47,12 @@ export function createTestContext(
   const { commands, runner } = createRecordingRunner(onCommand);
   return {
     commands,
-    context: { packageManager, projectDirectory, report: createSetupReport(), runCommand: runner },
+    context: {
+      isWorkspaceRoot: false,
+      packageManager,
+      projectDirectory,
+      report: createSetupReport(),
+      runCommand: runner,
+    },
   };
 }

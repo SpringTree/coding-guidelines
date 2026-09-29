@@ -2,7 +2,7 @@ import { readPackageManifest } from "../package-json.js";
 import { buildExecuteCommand } from "../package-manager.js";
 import { writeHuskyHook } from "./husky.js";
 import {
-  fileExists,
+  findExistingFile,
   installDevDependencies,
   type SetupContext,
   writeFileIfMissing,
@@ -33,9 +33,7 @@ const commitlintConfigFileNames = [
 export function setupCommitlint(context: SetupContext): void {
   installDevDependencies(context, ["@commitlint/cli", "@commitlint/config-conventional"]);
 
-  const existingConfigFileName = commitlintConfigFileNames.find((fileName) =>
-    fileExists(context, fileName),
-  );
+  const existingConfigFileName = findExistingFile(context, commitlintConfigFileNames);
   if (existingConfigFileName) {
     context.report.skipped.push(`commitlint config (${existingConfigFileName} already exists)`);
   } else if ("commitlint" in readPackageManifest(context.projectDirectory)) {

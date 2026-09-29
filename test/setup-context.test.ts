@@ -3,6 +3,7 @@ import { readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import {
   addScripts,
+  findExistingFile,
   installDevDependencies,
   writeFileIfMissing,
 } from "../src/setup/setup-context.js";
@@ -54,5 +55,30 @@ describe("installDevDependencies", () => {
     installDevDependencies(context, ["oxfmt"]);
 
     expect(commands).toEqual([["pnpm", "add", "--save-dev", "oxfmt"]]);
+  });
+});
+
+describe("installDevDependencies at a workspace root", () => {
+  test("passes the workspace root flag", () => {
+    const { commands, context } = createTestContext({}, "pnpm");
+    context.isWorkspaceRoot = true;
+
+    installDevDependencies(context, ["oxfmt"]);
+
+    expect(commands).toEqual([["pnpm", "add", "--save-dev", "--workspace-root", "oxfmt"]]);
+  });
+});
+
+describe("findExistingFile", () => {
+  test("returns the first existing file name in list order", () => {
+    const { context } = createTestContext({ "b.json": "", "c.json": "" });
+
+    expect(findExistingFile(context, ["a.json", "b.json", "c.json"])).toBe("b.json");
+  });
+
+  test("returns undefined when none exist", () => {
+    const { context } = createTestContext();
+
+    expect(findExistingFile(context, ["a.json"])).toBeUndefined();
   });
 });

@@ -66,7 +66,7 @@ describe("setupOxlint", () => {
     expect(readFileSync(path.join(context.projectDirectory, ".oxlintrc.json"), "utf8")).toBe(
       existingConfig,
     );
-    expect(context.report.skipped).toContain(".oxlintrc.json (already exists)");
+    expect(context.report.skipped).toContain("oxlint config (.oxlintrc.json already exists)");
   });
 
   test("reports a notice when init did not create a config file", () => {
@@ -76,4 +76,23 @@ describe("setupOxlint", () => {
 
     expect(context.report.notices.join("\n")).toContain("type-aware");
   });
+
+  test.each([".oxlintrc.jsonc", "oxlint.config.ts"])(
+    "does not create a second config next to an existing %s",
+    (existingConfigFile) => {
+      const { commands, context } = createTestContext(
+        { [existingConfigFile]: "{}" },
+        "bun",
+        simulateOxlintInit,
+      );
+
+      setupOxlint(context);
+
+      expect(commands).toEqual([["bun", "add", "--dev", "oxlint"]]);
+      expect(context.report.created).not.toContain(".oxlintrc.json");
+      expect(context.report.skipped).toContain(
+        `oxlint config (${existingConfigFile} already exists)`,
+      );
+    },
+  );
 });

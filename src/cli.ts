@@ -143,6 +143,7 @@ async function main(): Promise<number> {
   );
 
   const context: SetupContext = {
+    isWorkspaceRoot: detectedProject.isWorkspaceRoot,
     packageManager: detectedProject.packageManager,
     projectDirectory,
     report: createSetupReport(),

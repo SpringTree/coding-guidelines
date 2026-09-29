@@ -5,7 +5,9 @@ import { setupHusky, writeHuskyHook } from "../src/setup/husky.js";
 import { createTestContext } from "./helpers.js";
 
 function readScripts(projectDirectory: string): Record<string, string> {
-  return JSON.parse(readFileSync(path.join(projectDirectory, "package.json"), "utf8")).scripts;
+  const manifestText = readFileSync(path.join(projectDirectory, "package.json"), "utf8");
+  const manifest = JSON.parse(manifestText) as { scripts?: Record<string, string> };
+  return manifest.scripts ?? {};
 }
 
 describe("setupHusky", () => {

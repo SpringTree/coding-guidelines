@@ -28,3 +28,16 @@ describe("buildExecuteCommand", () => {
     expect(buildExecuteCommand("pnpm", "husky")).toEqual(["pnpm", "exec", "husky"]);
   });
 });
+
+describe("buildAddDevDependenciesCommand at a workspace root", () => {
+  test.each([
+    ["bun", ["bun", "add", "--dev", "oxlint"]],
+    ["npm", ["npm", "install", "--save-dev", "oxlint"]],
+    ["pnpm", ["pnpm", "add", "--save-dev", "--workspace-root", "oxlint"]],
+    ["yarn", ["yarn", "add", "--dev", "-W", "oxlint"]],
+  ] as const)("%s", (packageManager, expectedCommand) => {
+    expect(buildAddDevDependenciesCommand(packageManager, ["oxlint"], true)).toEqual([
+      ...expectedCommand,
+    ]);
+  });
+});

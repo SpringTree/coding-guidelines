@@ -17,6 +17,7 @@ export interface SetupReport {
 }
 
 export interface SetupContext {
+  isWorkspaceRoot: boolean;
   packageManager: PackageManagerName;
   projectDirectory: string;
   report: SetupReport;
@@ -29,6 +30,14 @@ export function createSetupReport(): SetupReport {
 
 export function fileExists(context: SetupContext, relativePath: string): boolean {
   return existsSync(path.join(context.projectDirectory, relativePath));
+}
+
+// Tools accept their config in several formats (.json, .jsonc, .ts, ...).
+// Returns the first existing one so a setup step can leave it alone instead of
+// adding a second, competing config file
+//
+export function findExistingFile(context: SetupContext, fileNames: string[]): string | undefined {
+  return fileNames.find((fileName) => fileExists(context, fileName));
 }
 
 // The CLI retrofits existing projects, so any file that already exists wins
@@ -66,7 +75,7 @@ export function addScripts(
 
 export function installDevDependencies(context: SetupContext, packageNames: string[]): void {
   context.runCommand(
-    buildAddDevDependenciesCommand(context.packageManager, packageNames),
+    buildAddDevDependenciesCommand(context.packageManager, packageNames, context.isWorkspaceRoot),
     context.projectDirectory,
   );
 }
