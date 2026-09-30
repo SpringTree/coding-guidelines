@@ -11,9 +11,10 @@ import { setupLintStaged } from "./setup/lint-staged.js";
 import { findMigrationHints } from "./setup/migration-hints.js";
 import { setupOxfmt } from "./setup/oxfmt.js";
 import { setupOxlint } from "./setup/oxlint.js";
+import { quarantineDays, setupQuarantine } from "./setup/quarantine.js";
 import { createSetupReport, type SetupContext, type SetupReport } from "./setup/setup-context.js";
 
-type ToolName = "commitlint" | "lintStaged" | "oxfmt" | "oxlint";
+type ToolName = "commitlint" | "lintStaged" | "oxfmt" | "oxlint" | "quarantine";
 
 class SetupCancelledError extends Error {
   constructor() {
@@ -73,6 +74,12 @@ async function prepareGitRepository(context: SetupContext): Promise<boolean> {
 
 async function askForTools(canInstallHooks: boolean): Promise<Record<ToolName, boolean>> {
   const toolQuestions: prompts.PromptObject<ToolName>[] = [
+    {
+      initial: true,
+      message: `Set up the package quarantine (refuse package versions younger than ${quarantineDays} days)?`,
+      name: "quarantine",
+      type: "confirm",
+    },
     { initial: true, message: "Set up oxlint (linting)?", name: "oxlint", type: "confirm" },
     { initial: true, message: "Set up oxfmt (formatting)?", name: "oxfmt", type: "confirm" },
   ];
@@ -99,6 +106,7 @@ async function askForTools(canInstallHooks: boolean): Promise<Record<ToolName, b
     lintStaged: toolAnswers.lintStaged === true,
     oxfmt: toolAnswers.oxfmt === true,
     oxlint: toolAnswers.oxlint === true,
+    quarantine: toolAnswers.quarantine === true,
   };
 }
 
@@ -153,8 +161,13 @@ async function main(): Promise<number> {
   const canInstallHooks = await prepareGitRepository(context);
   const selectedTools = await askForTools(canInstallHooks);
 
-  // Order matters: husky must be installed before hooks are written into .husky/
+  // Order matters:
+  // - the quarantine config goes first so every package installed below respects it
+  // - husky must be installed before hooks are written into .husky/
   //
+  if (selectedTools.quarantine) {
+    setupQuarantine(context);
+  }
   if (selectedTools.oxlint) {
     setupOxlint(context);
   }

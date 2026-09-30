@@ -16,6 +16,7 @@ npx @springtree/coding
 
 The tool detects whether the current folder is a [Bun](https://bun.sh) or Node project (npm, pnpm or yarn) and asks what to set up:
 
+- a package quarantine: `.npmrc` and `bunfig.toml` refuse package versions published less than 7 days ago, as required by our [supply-chain gates](https://github.com/SpringTree/springtree-ci-workflows)
 - [oxlint](https://oxc.rs/docs/guide/usage/linter) with its default rules, plus [type-aware linting](https://oxc.rs/docs/guide/usage/linter/type-aware) when a `tsconfig.json` is present
 - [oxfmt](https://oxc.rs/docs/guide/usage/formatter) with its default style
 - [commitlint](https://commitlint.js.org) for commit messages
@@ -74,6 +75,7 @@ This works with protected branches because nothing is pushed to the main branch 
 ### Pull request validation with CI
 
 We have organization wide enforced checks on our pull requests for ISO27001 related purposes.
+Repositories call the shared [supply-chain gates](https://github.com/SpringTree/springtree-ci-workflows) (secrets, licences, code and package quarantine) from a `compliance.yml` workflow.
 Projects should implement their own specific checks alongside these.
 
 ## Contributing
