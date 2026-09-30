@@ -21,7 +21,7 @@ jobs:
       - id: app-token
         uses: actions/create-github-app-token@v3
         with:
-          client-id: ${{ secrets.RELEASE_APP_CLIENT_ID }}
+          client-id: ${{ vars.RELEASE_APP_CLIENT_ID }}
           private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
 
       # Opens or updates the release PR; when that PR is merged it creates the tag

@@ -103,4 +103,4 @@ See [staged publishing](https://docs.npmjs.com/staged-publishing) and [trusted p
 One-time setup:
 
 - npm: trusted publisher for this repository and `release.yml`, stage-only
-- GitHub: an organization GitHub App with contents, pull requests and issues write access on this repository; its client id and private key as the `RELEASE_APP_CLIENT_ID` and `RELEASE_APP_PRIVATE_KEY` repository secrets
+- GitHub: an organization GitHub App with contents, pull requests and issues write access on this repository; its client id as the `RELEASE_APP_CLIENT_ID` repository variable and its private key as the `RELEASE_APP_PRIVATE_KEY` repository secret
