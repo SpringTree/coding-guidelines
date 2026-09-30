@@ -33,6 +33,36 @@ describe("setupHusky", () => {
     expect(readScripts(context.projectDirectory).prepare).toBe("tsc");
     expect(context.report.notices.join("\n")).toContain('"prepare": "tsc && husky"');
   });
+
+  test.each(["husky", "tsc && husky", "cd .. && husky frontend/.husky"])(
+    "gives no prepare advice when the script already runs husky: %s",
+    (existingPrepareScript) => {
+      const { context } = createTestContext({
+        "package.json": JSON.stringify({ scripts: { prepare: existingPrepareScript } }),
+      });
+
+      setupHusky(context);
+
+      expect(readScripts(context.projectDirectory).prepare).toBe(existingPrepareScript);
+      expect(context.report.notices).toEqual([]);
+    },
+  );
+
+  test.each(["husky install", "tsc && husky install"])(
+    "advises replacing the husky 8 command in: %s",
+    (existingPrepareScript) => {
+      const { context } = createTestContext({
+        "package.json": JSON.stringify({ scripts: { prepare: existingPrepareScript } }),
+      });
+
+      setupHusky(context);
+
+      expect(readScripts(context.projectDirectory).prepare).toBe(existingPrepareScript);
+      const noticeText = context.report.notices.join("\n");
+      expect(noticeText).toContain('replace "husky install" with "husky"');
+      expect(noticeText).not.toContain('&& husky"');
+    },
+  );
 });
 
 describe("writeHuskyHook", () => {
