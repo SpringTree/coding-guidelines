@@ -4,54 +4,33 @@
 
 This repository contains information about our company rules and guidelines when it comes to writing software.
 Our primary development language is JavaScript/TypeScript so those will be featured here prominently.
-A collection of configuration files for various tools and linters that can be used in our projects can also be found here.
+Starting a new project should be done with one of our (private) starter template repositories.
 
-You can now use `npx` to setup linting and the gitcommit hooks using this repository:
+You can use `bunx` or `npx` to set up linting, formatting and git hooks in an existing project:
 
 ```bash
+bunx @springtree/coding
+# or
 npx @springtree/coding
 ```
 
-It will ask you a series of questions for what to setup.
+The tool detects whether the current folder is a [Bun](https://bun.sh) or Node project (npm, pnpm or yarn) and asks what to set up:
 
-## Style guide
+- a package quarantine: `.npmrc` and `bunfig.toml` refuse package versions published less than 7 days ago, as required by our [supply-chain gates](https://github.com/SpringTree/springtree-ci-workflows)
+- [oxlint](https://oxc.rs/docs/guide/usage/linter) with its default rules, plus [type-aware linting](https://oxc.rs/docs/guide/usage/linter/type-aware) when a `tsconfig.json` is present
+- [oxfmt](https://oxc.rs/docs/guide/usage/formatter) with its default style
+- [commitlint](https://commitlint.js.org) for commit messages
+- [lint-staged](https://github.com/lint-staged/lint-staged) to lint and format staged files before each commit
 
-We have adopted the [Airbnb](https://github.com/airbnb/javascript) style guide for our JavaScript and TypeScript projects.
-This is a very widely used standard and support is available in a multitude of editors and CI tools.
-We have only modified the following rules:
+Existing configuration files and `package.json` scripts are never overwritten.
+Without a `package.json` the tool stops; start new projects from a template repository instead.
 
-* max line length increased to 160
-* allow console statements
+## Linting and formatting
 
-All new projects must use this style guide.
-When coding on an existing project stick to the current style used throughout that project if there are too many issues when switching.
-This repository contains configuration files for [eslint](linters/.eslintrc) and [tslint](linters/.tslint.json).
+We've standardized on using oxlint and oxfmt in their standard configuration.
+Exceptions or adjustments to standard rules need a very good reason.
 
-You can install these tools using npm:
-
-```bash
-npm install eslint \
-            eslint-config-airbnb-typescript \
-            eslint-plugin-import@^2.22.0 \
-            eslint-plugin-jsx-a11y@^6.3.1 \
-            eslint-plugin-react@^7.20.3 \
-            eslint-plugin-react-hooks@^4.0.8 \
-            @typescript-eslint/eslint-plugin@^4.4.1 \
-            --save-dev
-```
-
-### Code comments
-
-Try to document why your code is there not what it does.
-Document any special circumstances you've encountered when writing or adjusting said code.
-Well structured and documented code will save you and your co-workers time in the future.
-Writing out your code comments before writing any actual code is also a nice trick to organise your thoughts before diving into the details.
-
-Feel free to to read [this article](https://medium.freecodecamp.org/code-comments-the-good-the-bad-and-the-ugly-be9cc65fbf83) as a nice primer.
-
-For your VSCode you can install the [document this plugin](https://marketplace.visualstudio.com/itemdetails?itemName=joelday.docthis) to help with the automatic generation of JSDoc style comments for your code.
-Please disable the memberOf generation in your vscode preferences for this plugin.
-![document this setting](docs/document_this.png)
+Coming from ESLint or Prettier? See the [ESLint migration guide](https://oxc.rs/docs/guide/usage/linter/migrate-from-eslint) and the [Prettier migration guide](https://oxc.rs/docs/guide/usage/formatter/migrate-from-prettier).
 
 ## Human language
 
@@ -61,70 +40,22 @@ All code, variable names, code comments and documentation should be written in E
 
 Every project needs to have a `README.md` (or equivalent) that must contain:
 
-* the name and purpose of the project
-* how to run the project
-* how to build the project
+- the name and purpose of the project
+- how to run the project
+- how to build the project
 
 Any additional information about how to run unit tests should be added if available.
-
-## Git flow AVH
-
-We use [Git flow AVH](https://github.com/petervanderdoes/gitflow-avh) as our branching strategy.
-You can install this on a Mac using [Homebrew](https://brew.sh/)
-
-```bash
-brew install git-flow-avh
-```
-
-We have a whole wiki page dedicated to [how we use Git flow to perform releases](https://github.com/SpringTree/coding-guidelines/wiki/Release-&-development-flow).
-Try to contain work in separate feature branches as much as possible.
-
-## Git branch protection and enforcement
-
-Projects on GitHub should be set up with branch protection to now allow direct pushes to the `master` and `develop` branches.
-The restriction on `master` is also enforced for administrators.
-We have our own [git branch name checking tool](https://github.com/SpringTree/check-git-branch-name).
-
-Branch naming checking can be installed with:
-
-```bash
-npx @springtree/coding --gitflow
-```
-
-NOTE: Be sure to initialize your repo with git-flow first and perform the initial push of master and develop branches.
+We have a `README_TEMPLATE.md` available as a starting point.
 
 ## Git commit log format
 
-We use the conventional commit log format which we enforce using a combination of [commitlint](https://github.com/marionebl/commitlint) and [husky](https://github.com/typicode/husky).
+We use the [Conventional Commits](https://www.conventionalcommits.org) format, enforced with [commitlint](https://commitlint.js.org) from a git hook managed by [husky](https://typicode.github.io/husky).
+[lint-staged](https://github.com/lint-staged/lint-staged) runs oxlint and oxfmt on staged files in the same way.
 
-You can install these tools using npm:
+Setup guides:
 
-```bash
-npm i -D husky @commitlint/cli @commitlint/config-conventional
-```
-
-Add the following husky hook to your package.json to enforce the format:
-
-```json
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-```
-
-Create a commitlint configuration files:
-
-```bash
-echo "module.exports = { extends: ['@commitlint/config-conventional'] }" > commitlint.config.js
-```
-
-## Linting
-
-This tool provides configuration for both eslint with TypeScript support.
-The use of tslint is deprecated.
-A hook will be installed by this tool run `lint-staged` on your git staged files.
-This will auto-fix possible issues and prevent a commit of unlinted code.
+- [commitlint local setup](https://commitlint.js.org/guides/local-setup)
+- [husky getting started](https://typicode.github.io/husky/get-started.html)
 
 ## Build using CI
 
@@ -133,15 +64,45 @@ This should preferably be set up at project inception.
 
 We use the following CI's at this time:
 
-* [Bitrise.io](http://bitrise.io) (for mobile)
-* [TravisCI](https://travis-ci.com) (general purpose)
-* CloudBuild (Google projects)
+- [GitHub Actions](https://docs.github.com/en/actions)
+- [CloudBuild](https://cloud.google.com/build/docs) (Google projects)
+- [Bitrise.io](http://bitrise.io) (for mobile)
 
-Use tools like docker to encapsulate your build chain.
-
-We highly recommend using [semantic-release](https://github.com/semantic-release/semantic-release) for un-opinionated versioning.
+We recommend [release-please](https://github.com/googleapis/release-please-action) for versioning.
+It derives the next version from the conventional commits, keeps a release pull request with the changelog up to date and creates the tag and GitHub release when that pull request is merged.
+This works with protected branches because nothing is pushed to the main branch directly.
 
 ### Pull request validation with CI
 
-Pull requests should be set up to use the CI to validate the branch is building.
-If available this should include running the unit test suite.
+We have organization wide enforced checks on our pull requests for ISO27001 related purposes.
+Repositories call the shared [supply-chain gates](https://github.com/SpringTree/springtree-ci-workflows) (secrets, licences, code and package quarantine) from a `compliance.yml` workflow.
+Projects should implement their own specific checks alongside these.
+
+## Contributing
+
+This repository uses [Bun](https://bun.sh).
+
+```bash
+bun install
+bun test
+bun run build
+node dist/cli.js --version
+```
+
+Run the CLI from source in another project folder with `bun /path/to/coding-guidelines/src/cli.ts`.
+
+### Releasing
+
+Releases are fully handled by GitHub Actions; never publish from a laptop.
+
+1. Merge pull requests with conventional commit messages into `master`
+2. release-please opens or updates a release pull request with the version bump and changelog
+3. Merging the release pull request creates the tag and GitHub release, and the release workflow runs `npm stage publish`
+4. A maintainer approves the staged package with 2FA: `npm stage list @springtree/coding` and `npm stage approve <stage-id>`, or the Staged Packages tab on npmjs.com
+
+See [staged publishing](https://docs.npmjs.com/staged-publishing) and [trusted publishing](https://docs.npmjs.com/trusted-publishers) for background.
+
+One-time setup:
+
+- npm: trusted publisher for this repository and `release.yml`, stage-only
+- GitHub: an organization GitHub App with contents, pull requests and issues write access on this repository; its client id as the `RELEASE_APP_CLIENT_ID` repository variable and its private key as the `RELEASE_APP_PRIVATE_KEY` repository secret
