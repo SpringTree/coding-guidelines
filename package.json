@@ -27,8 +27,8 @@
   ],
   "type": "module",
   "scripts": {
-    "build": "bunup",
-    "dev": "bunup --watch",
+    "build": "bun build src/cli.ts --target node --outdir dist --packages external",
+    "dev": "bun build src/cli.ts --target node --outdir dist --packages external --watch",
     "fmt": "oxfmt --check",
     "fmt:fix": "oxfmt",
     "lint": "oxlint",
@@ -46,7 +46,6 @@
     "@commitlint/config-conventional": "^21.2.3",
     "@types/bun": "^1.4.2",
     "@types/prompts": "^2.4.9",
-    "bunup": "^0.16.32",
     "husky": "^9.1.7",
     "lint-staged": "^17.5.1",
     "oxfmt": "^0.70.0",

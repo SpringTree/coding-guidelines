@@ -16,5 +16,5 @@
     "verbatimModuleSyntax": true
   },
   "include": ["src/**/*", "test/**/*"],
-  "exclude": ["bunup.config.ts", "dist", "node_modules"]
+  "exclude": ["dist", "node_modules"]
 }
